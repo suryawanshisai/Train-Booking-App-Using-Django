@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block styleLink %}
+
+<link rel="stylesheet" href="/static/css/bookings.css">
+
+{% endblock %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+
+<div class="user-bookingsPage">
+    <h1>Bookings</h1>
+
+    <div class="user-bookings">
+
+      {% for booking in bookings %}
+          <div class="user-booking" >
+          <p><b>Booking ID:</b> {{booking.id}}</p>
+          <span>
+            <p><b>Mobile:</b> {{booking.mobile}}</p>
+            <p><b>Email:</b> {{booking.email}}</p>
+          </span>
+          <span>
+            <p><b>Train no:</b> {{booking.trainNumber}}</p>
+            <p><b>Train name:</b> {{booking.trainName}}</p>
+          </span>
+          <span>
+            <p><b>On-boarding:</b> {{booking.StartStation}}</p>
+            <p><b>Destination:</b> {{booking.destinationStation}}</p>
+          </span>
+          
+          <span>
+            <p><b>Journey date:</b> {{booking.journeyDate}}</p>
+          </span>
+          <span>
+            <p><b>Total price:</b> {{booking.totalPrice}}</p>
+      
+              <p><b>Booking status:</b> {{booking.bookingStatus}}</p>
+            
+          </span>
+          {% if booking.bookingStatus == 'confirmed' %}
+            
+            <div>
+              <a href="/cancel-booking/{{booking.id}}"><button class="btn btn-danger" >Cancel Ticket</button></a>
+            </div>
+            {% endif %}
+        </div>
+     
+        {% endfor %}
+        
+    </div>
+  </div>
+
+
+
+{% endblock %}

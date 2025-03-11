@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block styleLink %}
+
+<link rel="stylesheet" href="/static/css/navbar.css">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="navbar">
+
+    <h3 >SB TrainConnect</h3>
+
+    <div class="nav-options"  style="display: none;" id='options_loggedOut' >
+        <a href="/"><p>Home</p></a>
+        <a href="/login"><p >Login</p></a>
+    </div>
+
+    <div class="nav-options"  style="display: none;" id='options_user' >
+        <a href="/"><p>Home</p></a>
+        <a href="/load-bookings"><p >Bookings</p></a>
+        <p id="logoutBtn_user" class="logoutBtn" >logout</p>
+    </div>
+
+    <div class="nav-options"  style="display: none;" id='options_admin' >
+        <a href="/admin"><p>Home</p></a>
+        <a href="/allUsers"><p >Users</p></a>
+        <a href="/allBookings"><p >Bookings</p></a>
+        <a href="/allTrains"><p >Trains</p></a>
+        <a href="/newTrain"><p >Add Train</p></a>
+        <p id="logoutBtn_admin" class="logoutBtn">logout</p>
+    </div>
+</div>
+
+
+<script>
+    // Event listeners for both user and admin logout
+    function setupLogoutButton() {
+        const userLogoutBtn = document.getElementById('logoutBtn_user');
+        const adminLogoutBtn = document.getElementById('logoutBtn_admin');
+
+        // Logout for User
+        if (userLogoutBtn) {
+            userLogoutBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                logout();
+            });
+        }
+
+        // Logout for Admin
+        if (adminLogoutBtn) {
+            adminLogoutBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                logout();
+            });
+        }
+    }
+
+    // Shared logout function
+    function logout() {
+        // Clear localStorage for client-side storage
+        localStorage.clear();
+        // Optionally, make an API call here to logout from the server-side (session/token)
+        // Example for an API call:
+        // fetch('/logout', { method: 'POST' })
+        //   .then(response => response.json())
+        //   .then(data => console.log(data));
+
+        // Redirect after logout
+        window.location.href = '/';
+    }
+
+    function displayDivIfUserIdExists() {
+        const usertype = localStorage.getItem('usertype');
+
+        const options_user = document.getElementById('options_user');
+        const options_admin = document.getElementById('options_admin');
+        const options_loggedOut = document.getElementById('options_loggedOut');
+
+        if (usertype === 'user') {
+            options_user.style.display = 'flex';
+            options_loggedOut.style.display = 'none';
+            options_admin.style.display = 'none';
+        }
+        else if (usertype === "admin") {
+            options_user.style.display = 'none';
+            options_loggedOut.style.display = 'none';
+            options_admin.style.display = 'flex';
+        }
+        else{
+            options_user.style.display = 'none';
+            options_loggedOut.style.display = 'flex';
+            options_admin.style.display = 'none';
+        }
+
+        // Setup the logout buttons for both user and admin
+        setupLogoutButton();
+    }
+
+    window.onload = displayDivIfUserIdExists;
+</script>
+
+{% endblock %}

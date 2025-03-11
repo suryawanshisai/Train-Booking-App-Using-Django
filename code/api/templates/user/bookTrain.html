@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block styleLink %}
+
+<link rel="stylesheet" href="/static/css/bookTrain.css">
+
+{% endblock %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+
+{% if success %}
+  <script>
+    alert("Booking successful")
+    window.location.href = "/load-bookings"
+  </script>
+{% endif %}
+
+
+<div class='BookTrainPage'>
+
+    <form class="BookingTrainPageContainer" method="post">
+      <h2>Book ticket</h2>
+      {% csrf_token %}
+    <span>
+      <p><b>Train Name: </b> {{train.trainName}}</p>
+      <p><b>Train No: </b> {{train.trainNumber}}</p>
+    </span>
+    <span>
+      <p><b>Base price: </b> {{train.basePrice}}</p>
+    </span>
+    
+    <span>
+      <div class="form-floating mb-3">
+              {{form.email}}
+              <label htmlFor="floatingInputemail">Email</label>
+        </div>
+        <div class="form-floating mb-3">
+              {{form.mobile}}
+              <label htmlFor="floatingInputmobile">Mobile</label>
+        </div>
+    </span>
+    <span class='span3'>
+      <div class="no-of-passengers">
+        <div class="form-floating mb-3">
+              {{form.passengersCount}}
+              <label htmlFor="floatingInputreturnDate">No of passengers</label>
+        </div>
+      </div>
+      <div class="form-floating mb-3">
+              {{form.journeyDate}}
+              <label htmlFor="floatingInputreturnDate">Journey date</label>
+      </div>
+      <div class="form-floating">
+            {{form.coachType}}
+            <label htmlFor="floatingSelect">Coach type</label>
+      </div>
+
+    </span>
+    
+    <button class='btn btn-primary' type="submit">Book now</button>
+  </form>
+  </div>
+
+
+
+{% endblock %}

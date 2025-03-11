@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if success %}
+
+  <script>
+    alert("Ticket cancelled")
+    window.location.href = "/load-bookings"
+  </script>
+{% endif %}
+
+{% endblock%}

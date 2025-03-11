@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block styleLink %}
+
+<link rel="stylesheet" href="/static/css/landing.css">
+
+{% endblock %}
+
+{% block content %}
+
+
+{% include 'navbar.html' %}
+
+<div class="landingPage">
+    <div class="landingHero">
+
+
+      <div class="landingHero-title">
+        <h1 class="banner-h1">Embark on a Journey to the Extraordinary!!</h1>
+        <p class="banner-p">Unleash your travel desires and book extraordinary train journeys that will transport you to unforgettable destinations, igniting a sense of adventure like never before.</p>     
+      </div>
+
+      
+
+      <div class="train-search-container input-container mb-4">
+
+              {% comment %} {/* <h3>Journey details</h3> */} {% endcomment %}
+              
+              <form class='train-search-container-body' method="post">
+                {% csrf_token %}
+                <div class="form-floating">
+                  {{form.originStation}}
+                  <label htmlFor="floatingSelect">Departure station</label>
+                </div>
+                <div class="form-floating">
+                  {{form.destinationStation}}
+                  <label htmlFor="floatingSelect">Destination station</label>
+                </div>
+                <div class="form-floating mb-3">
+                  {{form.journeyDate}}
+                  <label htmlFor="floatingInputstartDate">Journey date</label>
+                </div>
+                
+                
+                  
+                <div>
+                  <button class="btn btn-primary" type="submit" >Search</button>
+                </div>
+
+              </form>
+              <p>{{error}}</p>
+          </div>
+
+            {% if trainLen != 0 %}
+              <div class="availableTrainsContainer">
+                <h1>Available Trains</h1>
+
+                <div class="trains">
+
+                    {% for train in trains %}
+
+                    <div class="train" key={train._id}>
+                        <div>
+                            <p> <b>{{train.trainName}}</b></p>
+                            <p ><b>Train Number:</b> {{train.trainNumber}}</p>
+                        </div>
+                        <div>
+                            <p ><b>Start Station:</b> {{train.originStation}}</p>
+                            <p ><b>Departure Time:</b> {{train.departureTime}}</p>
+                        </div>
+                        <div>
+                            <p ><b>Destination Station:</b> {{train.destinationStation}}</p>
+                            <p ><b>Arrival Time:</b> {{train.arrivalTime}}</p>
+                        </div>
+                        <div>
+                            <p ><b>Starting Price:</b> {{train.basePrice}}</p>
+                            <p ><b>Available Seats:</b> {{train.totalSeats}}</p>
+                        </div>
+                        <a href="/load-bookTrain/{{train.id}}"><button class="button btn btn-primary" >Book Now</button></a>
+                    </div>
+                 
+                  {% endfor %}
+
+                  
+
+                </div>
+              </div>
+        
+            {% endif %}
+
+            {% if trainSearch and trainLen == 0 %}
+               <div class="availableTrainsContainer">
+                <h1> No Trains</h1>
+                </div>
+
+            {% endif %}
+  
+              
+
+
+
+
+
+
+
+    </div>
+    <section id="about" class="section-about  p-4">
+    <div class="container">
+        <h2 class="section-title">About Us</h2>
+        <p class="section-description">
+            &nbsp; &nbsp;&nbsp; &nbsp; Welcome to our train ticket booking app, where we are dedicated to providing you with an exceptional travel experience from start to finish. Whether you're embarking on a daily commute, planning an exciting cross-country adventure, or seeking a leisurely scenic route, our app offers an extensive selection of train options to cater to your unique travel preferences.
+        </p>
+        <p class="section-description">
+            &nbsp; &nbsp;&nbsp; &nbsp; We understand the importance of convenience and efficiency in your travel plans. Our user-friendly interface allows you to effortlessly browse through a wide range of train schedules, compare fares, and choose the most suitable seating options. With just a few taps, you can secure your train tickets and be one step closer to your desired destination. Our intuitive booking process enables you to customize your travel preferences, such as selecting specific departure times, opting for a window seat, or accommodating any special requirements.
+        </p>
+        <p class="section-description">
+            &nbsp; &nbsp;&nbsp; &nbsp; With our train ticket booking app, you can embrace the joy of exploring new destinations, immerse yourself in breathtaking scenery, and create cherished memories along the way. Start your journey today and let us be your trusted companion in making your train travel dreams a reality. Experience the convenience, reliability, and comfort that our app offers, and embark on unforgettable train adventures with confidence.
+        </p>
+
+        <span><h5>2023 SB TrainConnect - &copy; All rights reserved</h5></span>
+
+    </div>
+</section>
+</div>
+
+
+
+
+
+{% endblock %}

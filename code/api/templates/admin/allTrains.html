@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block styleLink %}
+
+<link rel="stylesheet" href="/static/css/allTrains.css">
+
+{% endblock %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+
+
+<div class="allTrainsPage">
+    <h1>All Trains</h1>
+
+    <div class="allTrains">
+
+      {% for train in trains %}
+
+            <div class="allTrains-train">
+              <p><b>Train ID:</b> {{train.id}}</p>
+              <span>
+                <p><b>Train no:</b> {{train.trainNumber}}</p>
+                <p><b>Train name:</b> {{train.trainName}}</p>
+              </span>
+              <span>
+                <p><b>Starting station:</b> {{train.originStation}}</p>
+                <p><b>Departure time:</b> {{train.departureTime}}</p>
+              </span>
+              <span>
+                <p><b>Destination:</b> {{train.destinationStation}}</p>
+                <p><b>Arrival time:</b> {{train.arrivalTime}}</p>
+              </span>
+              <span>
+                <p><b>Base price:</b> {{train.basePrice}}</p>
+                <p><b>Total seats:</b> {{train.totalSeats}}</p>
+              </span>
+              <div>
+                <a href="/editTrain/{{train.id}}"><button class="btn btn-primary" >Edit details</button></a>
+              </div>
+            </div>
+      {% endfor %}
+
+    </div>
+  </div>
+
+
+
+
+{% endblock %}

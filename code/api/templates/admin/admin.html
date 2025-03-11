@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block styleLink %}
+
+<link rel="stylesheet" href="/static/css/admin.css">
+
+{% endblock %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+
+<div class="admin-page">
+
+    <div class="card admin-card users-card">
+        <h4>Users</h4>
+        <p> {{usersCount}} </p>
+        <a href="/allUsers"><button class="btn btn-primary" >View all</button></a>
+    </div>
+
+    <div class="card admin-card transactions-card">
+        <h4>Bookings</h4>
+        <p> {{bookingsCount}} </p>
+        <a href="/allBookings"><button class="btn btn-primary" >View all</button></a>
+    </div>
+
+    <div class="card admin-card deposits-card">
+        <h4>Trains</h4>
+        <p> {{trainsCount}} </p>
+        <a href="/allTrains"><button class="btn btn-primary" >View all</button></a>
+    </div>
+
+    <div class="card admin-card loans-card">
+        <h4>New Train</h4>
+        <p> (new route) </p>
+        <a href="/newTrain"><button class="btn btn-primary" >Add now</button></a>
+    </div>
+
+</div>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block styleLink %}
+
+<link rel="stylesheet" href="/static/css/newTrain.css">
+
+{% endblock %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+
+{% if success %}
+  <script>
+    alert("Train updated")
+    window.location.href = "/allTrains"
+  </script>
+{% endif %}
+
+<div class='NewTrainPage'>
+
+    <form class="NewTrainPageContainer" method="post">
+
+      <h2>Edit train</h2>
+
+      {% csrf_token %}
+    
+    <span class='newTrainSpan1'>
+      <div class="form-floating mb-3">
+              {{form.trainNumber}}
+              <label htmlFor="floatingInputemail">Train Name</label>
+        </div>
+        <div class="form-floating mb-3">
+          {{form.trainName}}
+          <label htmlFor="floatingInputmobile">Train Number</label>
+    </div>
+</span>
+<span>
+<div class="form-floating">
+    {{form.originStation}}
+    <label htmlFor="floatingSelect">Origin station</label>
+  </div>
+    <div class="form-floating mb-3">
+          {{form.departureTime}}
+          <label htmlFor="floatingInputmobile">Departure Time</label>
+    </div>
+</span>
+<span>
+    <div class="form-floating">
+      {{form.destinationStation}}
+      <label htmlFor="floatingSelect">Destination station</label>
+    </div>
+    <div class="form-floating mb-3">
+          {{form.arrivalTime}}
+          <label htmlFor="floatingInputArrivalTime">Arrival time</label>
+    </div>
+</span>
+<span class='newTrainSpan2'>
+  <div class="form-floating mb-3">
+          {{form.totalSeats}}
+          <label htmlhtmlFor="floatingInpuSeats">Total seats</label>
+    </div>
+    <div class="form-floating mb-3">
+          {{form.basePrice}}
+          <label htmlhtmlFor="floatingInputBasePrice">Base price</label>
+    </div>
+</span>
+    
+    <button class='btn btn-primary' >Update</button>
+  </form>
+  </div>
+
+
+
+
+{% endblock %}

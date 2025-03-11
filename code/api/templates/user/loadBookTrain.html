@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <script>
+        // Get the userId from localStorage
+        const user = localStorage.getItem('userId');
+
+        // Redirect to the bookTrain page with both trainId and userId
+        if (user) {
+            window.location.href = `/bookTrain/{{ trainId }}/${user}`;
+        } else {
+            // Handle case where userId is not found in localStorage
+            alert("User not logged in");
+            window.location.href = "/login";  // Redirect to login page
+        }
+    </script>
+{% endblock %}
